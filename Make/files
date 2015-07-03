@@ -1,0 +1,4 @@
+cellSplitter.C
+hexCellSetToPyr.C
+
+EXE = $(FOAM_APPBIN)/hexCellSetToPyr
