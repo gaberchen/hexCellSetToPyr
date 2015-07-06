@@ -42,12 +42,13 @@ using namespace Foam;
 int main(int argc, char *argv[])
 {
 #   include "addOverwriteOption.H"
-    argList::addOption
-    (
-        "set",
-        "name",
-        "split cells from specified cellSet only"
-    );
+//    argList::addOption
+//    (
+//        "set",
+//        "name",
+//        "split cells from specified cellSet only"
+//    );
+    argList::validArgs.append("cell set name");
 
 #   include "setRootCase.H"
 #   include "createTime.H"
@@ -64,10 +65,10 @@ int main(int argc, char *argv[])
     Info<< nl << "Looking up cells to convert to pyramids around"
         << " cell centre ..." << nl << endl;
     // Read cells in cellSet
-    const bool readSet   = args.optionFound("set");
+//    const bool readSet   = args.optionFound("set");
    
     // Read cells to cut from cellSet
-    cellSet set(mesh, args["set"]);
+    cellSet set(mesh, args[1]);
     List<label> cellLabels(set.toc());
     Info<< "    Found " << cellLabels.size() << " cells in cellset " << args["set"] << endl;
 
@@ -75,8 +76,8 @@ int main(int argc, char *argv[])
     Map<point> cellToPyrCentre(cellLabels.size());
 
 
-    if (readSet)
-    {
+//    if (readSet)
+//    {
         forAll(cellLabels, i)
         {                        
             // Load cell in cell set
@@ -95,13 +96,13 @@ int main(int argc, char *argv[])
                 validInputs = false;
             }
         }
-    }
-    else
-    {
-        Info<< "cellSet must be provided using the -set option. Exiting."
-            << endl;
-        validInputs = false;
-    }
+//    }
+//    else
+//    {
+//        Info<< "cellSet must be provided using the -set option. Exiting."
+//            << endl;
+//        validInputs = false;
+//    }
 
 
     if (!validInputs)
