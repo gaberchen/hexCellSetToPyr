@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     // Read cells to cut from cellSet
     cellSet set(mesh, args[1]);
     List<label> cellLabels(set.toc());
-    Info<< "    Found " << cellLabels.size() << " cells in cellset " << args["set"] << endl;
+    Info<< "    Found " << cellLabels.size() << " cells in cellset " << args[1] << endl; //"set"] << endl;
 
     // Loop over cells in cellSet and add cell centers to topology change
     Map<point> cellToPyrCentre(cellLabels.size());
